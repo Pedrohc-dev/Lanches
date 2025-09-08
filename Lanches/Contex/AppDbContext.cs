@@ -11,7 +11,7 @@ namespace Lanches.Contex
         }
 
         public DbSet<Lanche>Lanches { get; set; }
-
         public DbSet<Categoria> Categorias { get; set; }
+        public DbSet<CarrinhoCompraItem> CarinhoCompraItens { get; set; }
     }
 }

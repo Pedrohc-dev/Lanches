@@ -1,0 +1,35 @@
+﻿@model CarrinhoCompraViewModel
+
+<div class="container">
+    <div class="row">
+        
+        <img src ="~/img/"/>
+        <div>
+            <h4> Seu carrinho de Compra : </h4>
+        </div>
+        
+        <table class= "table table-bordered table-striped">
+
+            <thead>
+                <tr>
+                    <th>Quantidade</th>
+                    <th>Lanche</th>
+                    <th class="text-right">Preço</th>
+                    <th class="text-right">Subtotal</th>
+                  
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach(var item in Model.CarrinhoCompra.CarrinhoCompraItens)
+                {
+                    <tr>
+                        <td class="text-center">@item.Quantidade</td>
+                        <td class="text-center">@item.Lanche.Nome</td>
+                        <td class="text-center">@item.Lanche.Preco.ToString("c")</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

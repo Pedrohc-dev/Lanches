@@ -3,6 +3,7 @@ using Lanches.Contex;
 using Lanches.Repositories.Interfaces;
 using Lanches.Repositories;
 using Lanches.Repository;
+using Lanches.Models;
 
 namespace Lanches;
 
@@ -23,8 +24,12 @@ public class Startup
 
         services.AddTransient<ILancheRepository,LancheRepository>();
         services.AddTransient<ICategoriaRepository, CategoriaRepository>();
+        services.AddSingleton<IHttpContextAccessor,HttpContextAccessor>();
+        services.AddScoped(sp => CarrinhoCompra.GetCarrinho(sp));    
 
         services.AddControllersWithViews();
+        services.AddMemoryCache();
+        services.AddSession();
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -44,6 +49,8 @@ public class Startup
         app.UseStaticFiles();
 
         app.UseRouting();
+        
+        app.UseSession();
 
         app.UseAuthorization();
 
