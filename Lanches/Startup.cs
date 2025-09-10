@@ -4,6 +4,7 @@ using Lanches.Repositories.Interfaces;
 using Lanches.Repositories;
 using Lanches.Repository;
 using Lanches.Models;
+using Microsoft.Extensions.FileSystemGlobbing.Internal.Patterns;
 
 namespace Lanches;
 
@@ -56,6 +57,12 @@ public class Startup
 
         app.UseEndpoints(endpoints =>
         {
+
+        endpoints.MapControllerRoute(
+            name: "categoriaFiltro",
+            pattern: "Lanche/{action}/{categoria?}",
+            defaults: new { controller = "Lanche", action ="List"});
+
             endpoints.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
