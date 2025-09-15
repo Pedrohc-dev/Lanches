@@ -5,6 +5,7 @@ using Lanches.Repositories;
 using Lanches.Repository;
 using Lanches.Models;
 using Microsoft.Extensions.FileSystemGlobbing.Internal.Patterns;
+using Microsoft.AspNetCore.Identity;
 
 namespace Lanches;
 
@@ -22,6 +23,11 @@ public class Startup
     {
         services.AddDbContext<AppDbContext>(options =>
            options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+
+        services.AddIdentity<IdentityUser, IdentityRole>()
+            .AddEntityFrameworkStores<AppDbContext>()
+            .AddDefaultTokenProviders();
 
         services.AddTransient<ILancheRepository,LancheRepository>();
         services.AddTransient<ICategoriaRepository, CategoriaRepository>();
@@ -55,6 +61,7 @@ public class Startup
         
         app.UseSession();
 
+        app.UseAuthentication();
         app.UseAuthorization();
 
         app.UseEndpoints(endpoints =>
