@@ -1,6 +1,7 @@
 ﻿using Lanches.Models;
 using Lanches.Repositories.Interfaces;
 using Lanches.ViewModel;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Lanches.Controllers
@@ -10,7 +11,7 @@ namespace Lanches.Controllers
         private readonly ILancheRepository _lancheRepository;
         private readonly CarrinhoCompra _carrinhoCompra;
 
-        public CarrinhoCompraController(ILancheRepository lancheRepository, 
+        public CarrinhoCompraController(ILancheRepository lancheRepository,
                                         CarrinhoCompra carrinhoCompra)
         {
             _lancheRepository = lancheRepository;
@@ -18,7 +19,7 @@ namespace Lanches.Controllers
         }
 
         public IActionResult Index()
-        { 
+        {
             var itens = _carrinhoCompra.GetCarrinhoCompraItems();
             _carrinhoCompra.CarrinhoCompraItens = itens;
 
@@ -27,15 +28,16 @@ namespace Lanches.Controllers
                 CarrinhoCompra = _carrinhoCompra,
                 CarrinhoCompraTotal = _carrinhoCompra.GetCarrinhoCompraTotal()
             };
-            
+
             return View(carrinhoCompraVM);
         }
 
+        [Authorize]
         public RedirectToActionResult AdicionarItemNoCarrinhoCompra(int lancheid)
         {
             var lancheSelecionado = _lancheRepository.Lanches.FirstOrDefault(
                 p => p.LancheId == lancheid);
-            if(lancheSelecionado != null)
+            if (lancheSelecionado != null)
             {
                 _carrinhoCompra.AdicionarAoCarrinho(lancheSelecionado);
             }
@@ -44,10 +46,10 @@ namespace Lanches.Controllers
 
         public IActionResult RemoverItemDoCarrinhoCompra(int lancheid)
         {
-            var lancheSelecionado =  _lancheRepository.Lanches
+            var lancheSelecionado = _lancheRepository.Lanches
                 .FirstOrDefault(p => p.LancheId == lancheid);
 
-            if( lancheSelecionado != null)
+            if (lancheSelecionado != null)
             {
                 _carrinhoCompra.RemoverDoCarrinho(lancheSelecionado);
             }

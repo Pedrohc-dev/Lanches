@@ -29,12 +29,12 @@ public class Startup
             .AddEntityFrameworkStores<AppDbContext>()
             .AddDefaultTokenProviders();
 
-        services.AddTransient<ILancheRepository,LancheRepository>();
+        services.AddTransient<ILancheRepository, LancheRepository>();
         services.AddTransient<ICategoriaRepository, CategoriaRepository>();
         services.AddTransient<IPedidoRepository, PedidoRepository>();
 
-        services.AddSingleton<IHttpContextAccessor,HttpContextAccessor>();
-        services.AddScoped(sp => CarrinhoCompra.GetCarrinho(sp));    
+        services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+        services.AddScoped(sp => CarrinhoCompra.GetCarrinho(sp));
 
         services.AddControllersWithViews();
         services.AddMemoryCache();
@@ -58,7 +58,7 @@ public class Startup
         app.UseStaticFiles();
 
         app.UseRouting();
-        
+
         app.UseSession();
 
         app.UseAuthentication();
@@ -67,10 +67,15 @@ public class Startup
         app.UseEndpoints(endpoints =>
         {
 
-        endpoints.MapControllerRoute(
+            endpoints.MapControllerRoute(
+             name: "areas",
+             pattern: "{area:exists}/{controller=Admin}/{action=Index}/{id?}"
+             );
+
+            endpoints.MapControllerRoute(
             name: "categoriaFiltro",
             pattern: "Lanche/{action}/{categoria?}",
-            defaults: new { controller = "Lanche", action ="List"});
+            defaults: new { controller = "Lanche", action = "List" });
 
             endpoints.MapControllerRoute(
                 name: "default",
