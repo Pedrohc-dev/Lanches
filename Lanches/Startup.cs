@@ -7,6 +7,7 @@ using Lanches.Models;
 using Microsoft.Extensions.FileSystemGlobbing.Internal.Patterns;
 using Microsoft.AspNetCore.Identity;
 using Lanches.Services;
+using ReflectionIT.Mvc.Paging;
 
 namespace Lanches;
 
@@ -48,6 +49,13 @@ public class Startup
         services.AddScoped(sp => CarrinhoCompra.GetCarrinho(sp));
 
         services.AddControllersWithViews();
+
+        services.AddPaging(options =>
+        {
+            options.ViewName = "Bootstrap4";
+            options.PageParameterName = "pageindex";
+        });
+
         services.AddMemoryCache();
         services.AddSession();
     }

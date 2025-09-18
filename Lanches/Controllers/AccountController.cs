@@ -9,7 +9,7 @@ namespace Lanches.Controllers
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
 
-        public AccountController(UserManager<IdentityUser>userManager,SignInManager<IdentityUser> signInManager)
+        public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -20,7 +20,7 @@ namespace Lanches.Controllers
         {
             return View(new LoginViewModel()
             {
-             ReturnUrl = returnUrl 
+                ReturnUrl = returnUrl
             });
         }
 
@@ -82,6 +82,11 @@ namespace Lanches.Controllers
             HttpContext.User = null;
             await _signInManager.SignOutAsync();
             return RedirectToAction("Index", "Home");
+        }
+
+        public IActionResult AccesDenied()
+        {
+            return View();
         }
     }
 }
