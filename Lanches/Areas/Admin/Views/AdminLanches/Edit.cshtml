@@ -13,54 +13,77 @@
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="LancheId" />
+
             <div class="form-group">
                 <label asp-for="Nome" class="control-label"></label>
                 <input asp-for="Nome" class="form-control" />
                 <span asp-validation-for="Nome" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="DescricaoCurta" class="control-label"></label>
                 <input asp-for="DescricaoCurta" class="form-control" />
                 <span asp-validation-for="DescricaoCurta" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="DescriaoDetalhada" class="control-label"></label>
                 <input asp-for="DescriaoDetalhada" class="form-control" />
                 <span asp-validation-for="DescriaoDetalhada" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="Preco" class="control-label"></label>
                 <input asp-for="Preco" class="form-control" />
                 <span asp-validation-for="Preco" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="ImagemURL" class="control-label"></label>
-                <input asp-for="ImagemURL" class="form-control" />
-                <span asp-validation-for="ImagemURL" class="text-danger"></span>
+
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <label asp-for="ImagemURL" class="control-label"></label>
+                    <input asp-for="ImagemURL" class="form-control" />
+                    <span asp-validation-for="ImagemURL" class="text-danger"></span>
+                </div>
             </div>
+
+            <div class="form-group col-md-6">
+                <img src="@Model.ImagemURL"
+            </div>
+
             <div class="form-group">
                 <label asp-for="ImagemThumbnailURL" class="control-label"></label>
                 <input asp-for="ImagemThumbnailURL" class="form-control" />
                 <span asp-validation-for="ImagemThumbnailURL" class="text-danger"></span>
             </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="IsLanchePreferido" /> @Html.DisplayNameFor(model => model.IsLanchePreferido)
-                </label>
+
+            <div class="row">
+                <div class="form-group col-sm-4">
+                    <label class="control-label">Marcar como Preferido?</label>
+                    <br />
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="IsLanchePreferido" /> @Html.DisplayNameFor(model => model.IsLanchePreferido)
+                    </label>
+                </div>
+
+                <div class="form-group col-sm-4">
+                    <label class="control-label">Marcar como em Estoque?</label>
+                    <br />
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="EmEstoque" /> @Html.DisplayNameFor(model => model.EmEstoque)
+                    </label>
+                </div>
             </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="EmEstoque" /> @Html.DisplayNameFor(model => model.EmEstoque)
-                </label>
-            </div>
+            
             <div class="form-group">
                 <label asp-for="CategoriaId" class="control-label"></label>
                 <select asp-for="CategoriaId" class="form-control" asp-items="ViewBag.CategoriaId"></select>
                 <span asp-validation-for="CategoriaId" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
+
         </form>
     </div>
 </div>

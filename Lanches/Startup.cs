@@ -8,6 +8,7 @@ using Microsoft.Extensions.FileSystemGlobbing.Internal.Patterns;
 using Microsoft.AspNetCore.Identity;
 using Lanches.Services;
 using ReflectionIT.Mvc.Paging;
+using Lanches.Areas.Admin.Services;
 
 namespace Lanches;
 
@@ -35,6 +36,7 @@ public class Startup
         services.AddTransient<ICategoriaRepository, CategoriaRepository>();
         services.AddTransient<IPedidoRepository, PedidoRepository>();
         services.AddScoped<ISeedUserRoleInitial, SeedUserRoleInitial>();
+        services.AddScoped<RelatorioVendasService>();
 
         services.AddAuthorization(options =>
         {

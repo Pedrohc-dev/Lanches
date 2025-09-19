@@ -1,9 +1,10 @@
 ﻿using Lanches.Contex;
 using Lanches.Models;
-
+using Lanches.ViewModel;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using ReflectionIT.Mvc.Paging;
 
 namespace Lanches.Areas.Admin.Controllers
 {
@@ -25,9 +26,12 @@ namespace Lanches.Areas.Admin.Controllers
                                             .AsQueryable();
             if (!string.IsNullOrWhiteSpace(filter))
             {
-
+                resultado = resultado.Where(p => p.Nome.Contains(filter));
             }
 
+            var model = await PagingList.CreateAsync(resultado, 5, pageindex, sort, "Nome"); //dados que quer paginar,tamanho da pagina,,pageindex,criterio de ordenação que sera Nome
+            model.RouteValue = new RouteValueDictionary { { "filter", filter } };
+            return View(model);
         }
 
         // GET: Admin/AdminPedidos/Details/5
@@ -154,5 +158,29 @@ namespace Lanches.Areas.Admin.Controllers
         {
             return _context.Pedidos.Any(e => e.Pedidoid == id);
         }
+
+        public IActionResult PedidoLanche(int? id)
+        {
+            var pedido = _context.Pedidos
+                .Include(pd => pd.PedidoItens)
+                .ThenInclude(l => l.Lanche)
+                .FirstOrDefault(p => p.Pedidoid == id);
+
+            if(pedido == null)
+            {
+                Response.StatusCode = 404;
+                return View("PedidoNotFound",id.Value);
+            }
+
+            PedidoLancheViewModel pedidoLanche = new PedidoLancheViewModel()
+            {
+                Pedido = pedido,
+                PedidoDetalhes = pedido.PedidoItens
+            };
+            return View(pedidoLanche);
+        }
+
     }
+
+
 }
