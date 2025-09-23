@@ -1,0 +1,88 @@
+﻿using Lanches.Models;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
+
+namespace Lanches.Areas.Admin.Controllers
+{
+    public class AdminImagensController : Controller
+    {
+        private readonly ConfigurationImagens _myconfig;
+        private readonly IWebHostEnvironment _hostingEnvironment;
+
+        public AdminImagensController(IWebHostEnvironment hostingEnvironment, IOptions<ConfigurationImagens> myConfiguration)
+        {
+            _hostingEnvironment = hostingEnvironment;
+            _myconfig = myConfiguration.Value;
+        }
+
+        public IActionResult Index()
+        {
+            return View();
+        }
+
+        public async Task<IActionResult> UploadFiles(List<IFormFile> files)
+        {
+            if (files == null || files.Count == 0) // verificação se o arquivo e nulo
+            {
+                ViewData["Erro"] = "Error : Arquivo(s) não selecionado(s)";
+                return View(ViewData);
+            }
+
+            if (files.Count > 10) //verificação se o arquivo e maior que 10
+            {
+                ViewData["Erro"] = "Error : Quantidade de arquivos excedeu o limite";
+                return View(ViewData);
+            }
+
+            long size = files.Sum(f => f.Length); //soma a quantidade de bites dos arquivos enviados
+
+            var filePathsName = new List<string>();
+
+            var filePath = Path.Combine(_hostingEnvironment.WebRootPath, _myconfig.NomePastaImagensProdutos); //monta o caminho
+
+            foreach (var formFile in files) // percorre cada arquivo que quer enviar
+            {
+                if (formFile.FileName.Contains(".jpg") || formFile.FileName.Contains(".gif") || formFile.FileName.Contains(".png")) //verificação se sao esses tipos 
+                {
+                    var fileNameWithPath = string.Concat(filePath, "\\", formFile.FileName); //Nome completo do arquivo atraves da concatenação
+
+                    filePathsName.Add(fileNameWithPath);
+
+                    using (var stream = new FileStream(fileNameWithPath, FileMode.Create)) // se o arquivo não existir ele criar se exister ele sobreescreve pelo FileModel Create
+                    {
+                        await formFile.CopyToAsync(stream); // copiar arquivo para o servidor 
+                    }
+                }
+            }
+
+            ViewData["Resultado"] = $"{files.Count} arquivos foram enviados ao servidor, " + $"com tamanho total de: {size} bytes";
+
+            ViewBag.Arquivos = filePathsName;
+
+            return View(ViewData);
+        }
+
+        public IActionResult GetImagens()
+        { 
+            FileManagerModel model = new FileManagerModel();
+
+            var userImagesPath = Path.Combine(_hostingEnvironment.WebRootPath, _myconfig.NomePastaImagensProdutos);
+
+            DirectoryInfo dir = new DirectoryInfo(userImagesPath);
+
+            FileInfo[] files = dir.GetFiles();
+
+            model.PathImagesProdutos = _myconfig.NomePastaImagensProdutos;
+
+            if(files.Length == 0)
+            {
+                ViewData["Erro"] = $"Nenhum arquivo encontrado na pasta {userImagesPath}";
+            }
+
+            model.Files = files;
+
+            return View(model);
+        }
+    }
+}
