@@ -84,5 +84,19 @@ namespace Lanches.Areas.Admin.Controllers
 
             return View(model);
         }
+
+        public IActionResult Deletefile(string fname)
+        {
+            string _imagemDeleta = Path.Combine(_hostingEnvironment.WebRootPath, _myconfig.NomePastaImagensProdutos + "\\",fname);
+
+            if((System.IO.File.Exists(_imagemDeleta)))
+            {
+                System.IO.File.Exists(_imagemDeleta);
+
+                ViewData["Deletado"] = $"Arquivo(s) {_imagemDeleta} deletado com sucesso";
+            }
+
+            return View("index");
+        }
     }
 }

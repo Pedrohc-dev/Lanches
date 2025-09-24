@@ -23,6 +23,18 @@
                     <a class="nav-link text-light " asp-area="Admin" asp-controller="AdminCategoria" asp-action="Index">Categorias</a>
                     <a class="nav-link text-light " asp-area="Admin" asp-controller="AdminPedidos" asp-action="Index">Pedidos</a>
                     <a class="nav-link text-light " asp-area="Admin" asp-controller="AdminRelatorioVendas" asp-action="Index">Relatorio Vendas</a>
+                      <!--Grafico-->
+                        <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Gráficos de Vendas
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <a class="dropdown-item" asp-area="Admin" asp-controller="AdminGrafico" asp-action="Index">Vendas Anual</a>
+                                <a class="dropdown-item" asp-area="Admin" asp-controller="AdminGrafico" asp-action="VendasMensal" asp-route-dias="30">Vendas Mensal</a>
+                            <a class="dropdown-item" asp-area="Admin" asp-controller="AdminGrafico" asp-action="VendasSemanal" asp-route-dias="7">Vendas Semanal</a>
+                            </div>
+                        </div>
+                        <!--Fim do menu do Gráfico-->
                     <a class="nav-link text-light " asp-area="Admin" asp-controller="AdminImagens" asp-action="Index">Gerenciar Imagens</a>
                 </div>
             </div>
