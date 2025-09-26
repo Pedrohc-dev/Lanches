@@ -86,6 +86,7 @@ app.UseSession();
 app.UseAuthentication();
 app.UseAuthorization();
 
+#pragma warning disable ASP0014 //diretiva de preprocessador que desativa um aviso especifico relacionado ao codigo,relacionada ao razor
 app.UseEndpoints(endpoints =>
 {
 

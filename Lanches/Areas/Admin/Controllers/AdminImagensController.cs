@@ -67,20 +67,27 @@ namespace Lanches.Areas.Admin.Controllers
         { 
             FileManagerModel model = new FileManagerModel();
 
-            var userImagesPath = Path.Combine(_hostingEnvironment.WebRootPath, _myconfig.NomePastaImagensProdutos);
-
-            DirectoryInfo dir = new DirectoryInfo(userImagesPath);
-
-            FileInfo[] files = dir.GetFiles();
-
-            model.PathImagesProdutos = _myconfig.NomePastaImagensProdutos;
-
-            if(files.Length == 0)
+            try
             {
-                ViewData["Erro"] = $"Nenhum arquivo encontrado na pasta {userImagesPath}";
-            }
+                var userImagesPath = Path.Combine(_hostingEnvironment.WebRootPath, _myconfig.NomePastaImagensProdutos);
 
-            model.Files = files;
+                DirectoryInfo dir = new DirectoryInfo(userImagesPath);
+
+                FileInfo[] files = dir.GetFiles();
+
+                model.PathImagesProdutos = _myconfig.NomePastaImagensProdutos;
+
+                if (files.Length == 0)
+                {
+                    ViewData["Erro"] = $"Nenhum arquivo encontrado na pasta {userImagesPath}";
+                }
+
+                model.Files = files;
+            }
+            catch (Exception ex)
+            {
+                ViewData["Error"] = $"Erro : {ex.Message}";
+            }
 
             return View(model);
         }

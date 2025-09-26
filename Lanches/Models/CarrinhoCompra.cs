@@ -90,11 +90,25 @@ namespace Lanches.Models
 
         public List<CarrinhoCompraItem> GetCarrinhoCompraItems() 
         {
-            return CarrinhoCompraItens ?? (CarrinhoCompraItens=
-                _context.CarinhoCompraItens
-                .Where(c => c.CarrinhoCompraId == CarrinhoCompraId)
-                .Include(s => s.Lanche)
-                .ToList());
+            //return CarrinhoCompraItens ?? (CarrinhoCompraItens=
+            //    _context.CarinhoCompraItens
+            //    .Where(c => c.CarrinhoCompraId == CarrinhoCompraId)
+            //    .Include(s => s.Lanche)
+            //    .ToList());
+
+            if(CarrinhoCompraItens != null)// esse e igual o codigo comentado
+            {
+                return CarrinhoCompraItens;
+            }
+            else
+            {
+                CarrinhoCompraItens = _context.CarinhoCompraItens
+                                      .Where(c => c.CarrinhoCompraId == CarrinhoCompraId)
+                                      .Include(s => s.Lanche)
+                                      .ToList();
+                
+                return CarrinhoCompraItens;
+            }
         }
 
         public void LimparCarrino()
