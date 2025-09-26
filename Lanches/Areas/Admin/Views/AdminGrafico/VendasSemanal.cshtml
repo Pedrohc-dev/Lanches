@@ -11,10 +11,11 @@
     google.charts.load('current', {'packages': ['corechart']});
     google.charts.setOnLoadCallback(CarregaDados);
 
+    //obter os dados
     function CarregaDados(){
         $.ajax({
             url:'@Url.Action("VendasLanches", "AdminGrafico")',
-            data: {dias: 360},
+            data: {dias: 7},
             dataType: "json",
             type: "GET",
             error: function(xhr, status, error){
@@ -26,8 +27,9 @@
                 return false;
             }
         });
+        return false;
     }
-
+      //preparar os dados obtidos
       function GraficoVendasLanches(data){
             var dataArray = [
                 ['Lanche', 'Quatidade', 'Valores(R$)']
@@ -40,21 +42,26 @@
             var data = google.visualization.arrayToDataTable(dataArray);
 
             var options = {
-                title: 'Lanches - Vendas nos últimos 360 dias',
+                title: 'Lanches - Vendas nos últimos 7 dias',
+
+                curveType:'function',
+                legend: {position: 'bottom'},
+
                 chartArea: {
                     width: '70%'
                 },
                 colors: ['#5202b5', '#d2a828'],
                 hAxis: { //eixo x
-                    title: 'Valor Total (em Reais)',
+                    title: 'Lanches',
                     minValue:0
                 },
                 vAxis: { //eixo Y
-                    title: 'Lanches'
+                    title: 'Valor Total (em Reais)'
                 }
             };
-            var chart = new google.visualization.BarChart(document.getElementById('chart_div'));
+
+            //preparar a visualização e defino o tipo de grafico e o local
+            var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
             chart.draw(data, options)
-            return false;
         }
 </script>

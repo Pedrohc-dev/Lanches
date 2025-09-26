@@ -14,7 +14,7 @@
     //obter os dados
     function CarregaDados(){
         $.ajax({
-            url:@Url.Action("VendasLanches", "AdminGrafico"),
+            url:'@Url.Action("VendasLanches", "AdminGrafico")',
             data: {dias: 30},
             dataType: "json",
             type: "GET",
@@ -42,6 +42,13 @@
 
             var options = {
                 title: 'Lanches - Vendas nos últimos 30 dias',
+                
+                animation: {
+                    duration: 3000,
+                    easing: 'out',
+                    startup: true
+                },
+
                 chartArea: {
                     width: '70%'
                 },
@@ -56,7 +63,7 @@
             };
 
             //preparar a visualização e defino o tipo de grafico e o local
-            var chart = new google.visualization.BarChart(document.getElementById('chart_div'));
+            var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
             chart.draw(data, options)
         }
 </script>
