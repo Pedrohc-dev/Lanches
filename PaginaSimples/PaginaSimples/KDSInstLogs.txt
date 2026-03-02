@@ -1,0 +1,8 @@
+Checking Instances.
+Kdsinst.exe passed parameter: ADDKDSERVICE
+Checking Instances.
+KDSInst instance already exist in client, exiting...
+Checking Instances.
+Kdsinst.exe passed parameter: ADDKDSERVICE
+Checking Instances.
+KDSInst instance already exist in client, exiting...
