@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ControleDeValidade</title>
+    <link href="~/favicon.ico" rel="icon" />
+
+    <link rel="stylesheet" href="~/lib/dist/css/adminlte.min.css" />
+
+    <link rel="stylesheet" href="~/lib/fontawesome-new/css/all.min.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/ControleDeValidade.styles.css" asp-append-version="true" />
+</head>
+<body class="hold-transition sidebar-mini">
+    <div class="wrapper">
+        <header>
+            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fa-solid fa-bars"></i></a>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+        <aside class="main-sidebar sidebar-dark-primary elevation-4">
+
+            <a class="brand-link" asp-controller="Almoxarifado" asp-action="Index">
+                <img src="" alt="CGQ" class="brand-image img-circle elevation-3" style="opacity: .8">
+                <span class="brand-text font-weight-light">Validade</span>
+            </a>
+
+            <div class="sidebar">
+                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                    <li class="nav-item">
+                        <a asp-controller="Almoxarifado" asp-action="Index" class="nav-link">
+                            <i class="nav-icon fas fa-th"></i>
+                            <p>
+                                Almoxarifado
+                            </p>
+                        </a>
+                </ul>
+            </div>
+
+        </aside>
+        <div class="content-wrapper">
+            <main role="main" class="pb-3">
+                @RenderBody()
+            </main>
+        </div>
+
+        <footer class="border-top footer text-muted">
+            <div class="container">
+                &copy; 2026 - ControleDeValidade - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            </div>
+        </footer>
+    </div>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
