@@ -10,5 +10,7 @@ namespace ControleDeValidade.Context
         {
         }
         public DbSet<Almoxarifado> Almoxarifados { get; set; }
+        public DbSet<Material> Materiais { get; set; }
+        
     }
 }
