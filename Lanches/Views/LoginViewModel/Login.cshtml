@@ -3,7 +3,7 @@
 <table class="table">
 
     <tr>
-        <td><img src="~/img" alt="Login" class="center-block"/></td>
+        <td><img src="~/img" alt="Login" class="center-block" /></td>
 
         <td>
             <div class="row">
@@ -12,8 +12,8 @@
                     <form asp-controller="Account" asp-action="Login" method="post" role="form">
                         <hr />
                         <div asp-validation-summary="All" class="text-danger"></div>
-                        <input type="hidden"  asp-for="ReturnUrl" />
-                        
+                        <input type="hidden" asp-for="ReturnUrl" />
+
                         <div class="form-group">
                             <label asp-for="UserName" class="col-md-2 control-label"></label>
                             <div class="col-md-6">
