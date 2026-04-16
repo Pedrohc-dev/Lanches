@@ -22,5 +22,8 @@ namespace ControleDeValidade.Models
 
         [Required]
         public DateTime DataDeValidade { get; set; }
+
+        [Required]
+        public string Quantidade { get; set; }
     }
 }
