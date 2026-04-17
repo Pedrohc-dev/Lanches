@@ -27,7 +27,7 @@
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
 
             <a class="brand-link" asp-controller="Almoxarifado" asp-action="Index">
-                <img src="" alt="CGQ" class="brand-image img-circle elevation-3" style="opacity: .8">
+                @* <img src="" alt="" class="brand-image img-circle elevation-3" style="opacity: .8"> *@
                 <span class="brand-text font-weight-light">Validade</span>
             </a>
 
@@ -38,6 +38,15 @@
                             <i class="nav-icon fas fa-th"></i>
                             <p>
                                 Almoxarifado
+                            </p>
+                        </a>
+                </ul>
+                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                    <li class="nav-item">
+                        <a asp-controller="Material" asp-action="Index" class="nav-link">
+                            <i class="nav-icon fas fa-th"></i>
+                            <p>
+                                Material
                             </p>
                         </a>
                 </ul>
