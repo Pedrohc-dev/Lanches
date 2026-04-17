@@ -1,1 +1,82 @@
-﻿
+﻿@model Almoxarifado
+
+<div class="modal fade" id="modalCreate">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+
+            <form asp-action="Create" asp-controller="Almoxarifado" method="post">
+
+                <div class="modal-header bg-primary">
+                    <h4 class="modal-title">Validade do Material</h4>
+                    <button type="button" class="close" data-bs-dismiss="modal">
+                        <span>&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-3 mb-3">
+                                <div class="form-group">
+                                    <label for="NF">NF</label>
+                                    <input asp-for="NF" id="NF" class="form-control" />
+                                </div>
+
+                            <div class="col-md-4 mb-3">
+                                <div class="form-group">
+                                    <label for="Material">Material</label>
+                                    <input asp-for="Material" id="Material" class="form-control" />
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 mb-3">
+                                <div class="form-group">
+                                    <label for="CodigoMaterial">Código Material</label>
+                                    <input asp-for="CodigoMaterial" id="CodigoMaterial" class="form-control" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-3 mb-3">
+                                <div class="form-group">
+                                    <label for="Quantidade">Quantidade</label>
+                                    <input asp-for="Quantidade" id="Quantidade" class="form-control" />
+                                </div>
+                            </div>
+
+                            <div class="col-md-3 mb-3">
+                                <div class="form-group">
+                                    <label for="Setor">Setor</label>
+                                    <input asp-for="Setor" id="Setor" class="form-control" />
+                                </div>
+                            </div>
+
+                            <div class="col-md-3 mb-3">
+                                <div class="form-group">
+                                    <label for="DataDeEntrada">Data De Entrada</label>
+                                    <input asp-for="DataDeEntrada" id="DataDeEntrada" class="form-control" />
+                                </div>
+                            </div>
+
+                            <div class="col-md-3 mb-3">
+                                <div class="form-group">
+                                    <label for="DataDeValidade">Data De Validade</label>
+                                    <input asp-for="DataDeValidade" id="DataDeValidade" class="form-control" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" data-bs-dismiss="modal">Fechar</button>
+                    <button type="submit" class="btn btn-primary">Salvar</button>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+</div>

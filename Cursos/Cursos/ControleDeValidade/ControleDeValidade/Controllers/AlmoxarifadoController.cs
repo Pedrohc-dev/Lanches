@@ -14,9 +14,31 @@ namespace ControleDeValidade.Controllers
             _context = context;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(string NF, string Material, string CodigoMaterial)
         {
-            var almoxarifados = _context.Almoxarifados.ToList();
+            // Persistir valores nos inputs
+            ViewBag.NF = NF;
+            ViewBag.Material = Material;    
+            ViewBag.CodigoMaterial = CodigoMaterial;
+
+            var query = _context.Almoxarifados.AsQueryable();
+
+            if (!string.IsNullOrWhiteSpace(NF) && int.TryParse(NF, out var nfValue))
+            {
+                query = query.Where(a => a.NF == nfValue);
+            }
+
+            if (!string.IsNullOrWhiteSpace(Material))
+            {
+                query = query.Where(a => a.Material.Contains(Material));
+            }
+
+            if (!string.IsNullOrWhiteSpace(CodigoMaterial))
+            {
+                query = query.Where(a => a.CodigoMaterial.Contains(CodigoMaterial));
+            }
+
+            var almoxarifados = query.ToList();
             return View(almoxarifados);
         }
 
