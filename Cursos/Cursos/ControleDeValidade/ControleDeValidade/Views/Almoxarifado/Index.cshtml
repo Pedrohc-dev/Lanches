@@ -24,15 +24,17 @@
                     <div class="card-header">
                         <div class="card-title">
                             <h3 class="card-title">Pesquisa</h3>
+                            <a class="btn btn-success float-right" asp-controller="Almoxarifado" asp-action="Create">
+                                <i class="fa fa-plus"></i>
+                            </a>
                         </div>
-                        <input type="text" id="searchInput" class="form-control" placeholder="Search...">
                     </div>
                     <div class="card-body">
                         <form asp-action="Index" asp-controller="Almoxarifado" method="get">
                             <div class="col-md-4 mb-3">
                                 <div class="form-group">
                                     <label for="NF">Nota Fiscal</label>
-                                    <input id="NF" name="NF" type="number" class="form-control" value="@ViewBag.NF" />
+                                    <input id="NF" name="NF" type="text" class="form-control" value="@ViewBag.NF" />
                                 </div>
                             </div>
                             <div class="col-md-4 mb-3">
@@ -63,9 +65,6 @@
                 <div class="card">
                     <table class="table table-striped" id="dataTable">
                         <thead>
-                            <a class="btn btn-success" asp-controller="Almoxarifado" asp-action="Create">
-                                <i class="fa fa-plus"></i>
-                            </a>
                             <tr>
                                 <th>NF</th>
                                 <th>Material</th>
