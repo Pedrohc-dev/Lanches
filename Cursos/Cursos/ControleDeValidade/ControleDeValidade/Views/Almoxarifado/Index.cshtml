@@ -24,33 +24,31 @@
                     <div class="card-header">
                         <div class="card-title">
                             <h3 class="card-title">Pesquisa</h3>
-                            <a class="btn btn-success float-right" asp-controller="Almoxarifado" asp-action="Create">
-                                <i class="fa fa-plus"></i>
-                            </a>
+                            
                         </div>
                     </div>
                     <div class="card-body">
                         <form asp-action="Index" asp-controller="Almoxarifado" method="get">
-                            <div class="col-md-4 mb-3">
+                            <div class="col-lg-2">
                                 <div class="form-group">
                                     <label for="NF">Nota Fiscal</label>
                                     <input id="NF" name="NF" type="text" class="form-control" value="@ViewBag.NF" />
                                 </div>
                             </div>
-                            <div class="col-md-4 mb-3">
+                            <div class="col-lg-2">
                                 <div class="form-group">
                                     <label for="Material">Material</label>
                                     <input id="Material" name="Material" type="text" class="form-control" value="@ViewBag.Material" />
                                 </div>
                             </div>
-                            <div class="col-md-4 mb-3">
+                            <div class="col-lg-2">
                                 <div class="form-group">
                                     <label for="CodigoMaterial">Código Material</label>
                                     <input id="CodigoMaterial" name="CodigoMaterial" type="text" class="form-control" value="@ViewBag.CodigoMaterial" />
                                 </div>
                             </div>
-                            <div class="col-md-12 mb-3">
-                                <button type="submit" class="btn btn-primary">Pesquisar</button>
+                            <div class="col-lg-2 d-flex align-items-end">
+                                <button type="submit" class="btn btn-primary">Buscar</button>
                             </div>
                         </form>
 
@@ -63,36 +61,44 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                    <table class="table table-striped" id="dataTable">
-                        <thead>
-                            <tr>
-                                <th>NF</th>
-                                <th>Material</th>
-                                <th>Codigo do Material</th>
-                                <th>Setor</th>
-                                <th>Data de Entrada</th>
-                                <th>Data de Validade</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var item in Model)
-                            {
+                    <div class="card-header">
+                        <div class="card-tools">
+                            <a class="btn btn-success float-right" asp-controller="Almoxarifado" asp-action="Create">
+                                <i class="fa fa-plus"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="" card-body">
+                        <table class="table table-striped" id="dataTable">
+                            <thead>
                                 <tr>
-                                    <td>@item.NF</td>
-                                    <td>@item.Material</td>
-                                    <td>@item.CodigoMaterial</td>
-                                    <td>@item.Setor</td>
-                                    <td>@item.DataDeEntrada.ToShortDateString()</td>
-                                    <td>@item.DataDeValidade.ToShortDateString()</td>
+                                    <th>NF</th>
+                                    <th>Material</th>
+                                    <th>Codigo do Material</th>
+                                    <th>Setor</th>
+                                    <th>Data de Entrada</th>
+                                    <th>Data de Validade</th>
                                 </tr>
-                            }
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@item.NF</td>
+                                        <td>@item.Material</td>
+                                        <td>@item.CodigoMaterial</td>
+                                        <td>@item.Setor</td>
+                                        <td>@item.DataDeEntrada.ToShortDateString()</td>
+                                        <td>@item.DataDeValidade.ToShortDateString()</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div id="modalContainer"></div>
+        <div id="modalContainer"></div>
 </section>
 @section Scripts {
     <script>
