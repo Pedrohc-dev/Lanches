@@ -1,1 +1,94 @@
-﻿
+﻿@model IEnumerable<Material>
+
+
+@{
+    ViewData["Title"] = "Almoxarifado";
+}
+
+<script src="~/js/search.js"></script>
+
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Almoxarifado</h1>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card card-outline card-primary">
+                    <div class="card-header">
+                        <div class="card-title">
+                            <h3 class="card-title">Pesquisa</h3>
+
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <form asp-action="Index" asp-controller="Almoxarifado" method="get">
+                            <div class="col-lg-2">
+                                <div class="form-group">
+                                    <label for="NF">Nota Fiscal</label>
+                                    <input id="NF" name="NF" type="text" class="form-control" value="@ViewBag.NF" />
+                                </div>
+                            </div>
+                            <div class="col-lg-2">
+                                <div class="form-group">
+                                    <label for="Material">Material</label>
+                                    <input id="Material" name="Material" type="text" class="form-control" value="@ViewBag.Material" />
+                                </div>
+                            </div>
+                            <div class="col-lg-2">
+                                <div class="form-group">
+                                    <label for="CodigoMaterial">Código Material</label>
+                                    <input id="CodigoMaterial" name="CodigoMaterial" type="text" class="form-control" value="@ViewBag.CodigoMaterial" />
+                                </div>
+                            </div>
+                            <div class="col-lg-2 d-flex align-items-end">
+                                <button type="submit" class="btn btn-primary">Buscar</button>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-tools">
+                        </div>
+                    </div>
+                    <div class="card-body" >
+                        <table class="table table-striped" id="dataTable">
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Nome</th>
+                                    <th>Codigo do Material</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@item.MaterialId</td>
+                                        <td>@item.Nome</td>
+                                        <td>@item.CodigoMaterial</td>
+                                        
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

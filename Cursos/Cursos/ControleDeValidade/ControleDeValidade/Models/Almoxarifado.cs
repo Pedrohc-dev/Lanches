@@ -10,11 +10,10 @@ namespace ControleDeValidade.Models
         public int NF { get; set; }
 
         [Required]
-        public string Material { get; set; }
+        public int MaterialId { get; set; }
         
-        [Required]
-        public string CodigoMaterial{ get; set; }
-        
+       public Material Material { get; set; }
+
         public string Setor { get; set; }
 
         [Required]
