@@ -85,8 +85,8 @@
                                 {
                                     <tr>
                                         <td>@item.NF</td>
-                                        <td>@item.Material</td>
-                                        <td>@item.CodigoMaterial</td>
+                                        <td>@item.Material?.Nome</td>
+                                        <td>@item.Material?.CodigoMaterial</td>
                                         <td>@item.Setor</td>
                                         <td>@item.DataDeEntrada.ToShortDateString()</td>
                                         <td>@item.DataDeValidade.ToShortDateString()</td>

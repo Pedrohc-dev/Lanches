@@ -1,6 +1,8 @@
 ﻿using ControleDeValidade.Context;
 using ControleDeValidade.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace ControleDeValidade.Controllers
 {
@@ -21,7 +23,12 @@ namespace ControleDeValidade.Controllers
             ViewBag.Material = Material;    
             ViewBag.CodigoMaterial = CodigoMaterial;
 
-            var query = _context.Almoxarifados.AsQueryable();
+            var query = _context.Almoxarifados
+                .AsQueryable()
+                .AsQueryable();
+
+            // incluir material para evitar acesso a propriedades nulas
+            query = _context.Almoxarifados.Include(a => a.Material).AsQueryable();
 
             if (!string.IsNullOrWhiteSpace(NF) && int.TryParse(NF, out var nfValue))
             {
@@ -30,12 +37,12 @@ namespace ControleDeValidade.Controllers
 
             if (!string.IsNullOrWhiteSpace(Material))
             {
-                query = query.Where(a => a.Material.Contains(Material));
+                query = query.Where(a => a.Material != null && a.Material.Nome.Contains(Material)); 
             }
 
             if (!string.IsNullOrWhiteSpace(CodigoMaterial))
             {
-                query = query.Where(a => a.CodigoMaterial.Contains(CodigoMaterial));
+                query = query.Where(a => a.Material != null && a.Material.CodigoMaterial.Contains(CodigoMaterial));
             }
 
             var almoxarifados = query.ToList();
@@ -55,6 +62,7 @@ namespace ControleDeValidade.Controllers
 
         public IActionResult Create()
         {
+            ViewBag.MaterialList = new SelectList(_context.Materiais.ToList(), "MaterialId", "Nome");
             return View("_Create");
         }
 
@@ -68,11 +76,13 @@ namespace ControleDeValidade.Controllers
                 _context.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }
+            ViewBag.MaterialList = new SelectList(_context.Materiais.ToList(), "MaterialId", "Nome", almoxarifado.MaterialId);
             return View("_Create", almoxarifado);
         }
 
         public IActionResult Edit()
         {
+            ViewBag.MaterialList = new SelectList(_context.Materiais.ToList(), "MaterialId", "Nome");
             return PartialView("_Edit");
         }
 
@@ -85,6 +95,7 @@ namespace ControleDeValidade.Controllers
             {
                 return NotFound();
             }
+            ViewBag.MaterialList = new SelectList(_context.Materiais.ToList(), "MaterialId", "Nome", almoxarifado.MaterialId);
             return PartialView("_Edit", almoxarifado);
         }
 
